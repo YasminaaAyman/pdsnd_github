@@ -7,9 +7,16 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 def check_valid_input(input_word, input_type):
-    #type 1 is city
-    #type 2 is month
-    #type 3 is day
+    """
+    Validates and returns user input based on the specified input type.
+
+    Args:
+        input_word (str): The prompt to display to the user.
+        input_type (int): The type of input to validate (1 for city, 2 for month, 3 for day).
+
+    Returns:
+        str: The validated user input.
+    """
     while True:
         user_input = input(input_word).lower()
         try:
@@ -94,7 +101,12 @@ def load_data(city, month, day):
 
 
 def time_stats(df):
-    """Displays statistics on the most frequent times of travel."""
+    """
+    Displays statistics on the most frequent times of travel.
+
+    Args:
+        df (DataFrame): Pandas DataFrame containing city data
+    """
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
@@ -116,7 +128,12 @@ def time_stats(df):
 
 
 def station_stats(df):
-    """Displays statistics on the most popular stations and trip."""
+    """
+    Displays statistics on the most popular stations and trip.
+
+    Args:
+        df (DataFrame): Pandas DataFrame containing city data
+    """
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
@@ -139,7 +156,12 @@ def station_stats(df):
 
 
 def trip_duration_stats(df):
-    """Displays statistics on the total and average trip duration."""
+    """
+    Displays statistics on the total and average trip duration.
+
+    Args:
+        df (DataFrame): Pandas DataFrame containing city data
+    """
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
@@ -157,7 +179,13 @@ def trip_duration_stats(df):
 
 
 def user_stats(df, city):
-    """Displays statistics on bikeshare users."""
+    """
+    Displays statistics on bikeshare users.
+
+    Args:
+        df (DataFrame): Pandas DataFrame containing city data
+        city (str): Name of the city being analyzed
+    """
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
