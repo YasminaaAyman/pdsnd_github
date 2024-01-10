@@ -7,7 +7,6 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 def check_valid_input(input_word, input_type):
-<<<<<<< HEAD
     """
     Validates and returns user input based on the specified input type.
 
@@ -18,11 +17,9 @@ def check_valid_input(input_word, input_type):
     Returns:
         str: The validated user input.
     """
-=======
     valid_city_options = ['chicago', 'new york city', 'washington']
     valid_month_options = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
     valid_day_options = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all']
->>>>>>> refactoring
     while True:
         user_input = input(input_word).lower()
         try:
