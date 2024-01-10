@@ -7,6 +7,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 def check_valid_input(input_word, input_type):
+<<<<<<< HEAD
     """
     Validates and returns user input based on the specified input type.
 
@@ -17,22 +18,27 @@ def check_valid_input(input_word, input_type):
     Returns:
         str: The validated user input.
     """
+=======
+    valid_city_options = ['chicago', 'new york city', 'washington']
+    valid_month_options = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
+    valid_day_options = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all']
+>>>>>>> refactoring
     while True:
         user_input = input(input_word).lower()
         try:
-            if user_input in ['chicago','new york city','washington'] and input_type == 1:
+            if user_input in valid_city_options and input_type == 1:
                 break
-            elif user_input in ['january', 'february', 'march', 'april', 'may', 'june','all'] and input_type == 2:
+            elif user_input in valid_month_options and input_type == 2:
                 break
-            elif user_input in ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','all'] and input_type == 3:
+            elif user_input in valid_day_options and input_type == 3:
                 break
             else:
                 if input_type == 1:
-                    print("Your input should be: chicago, new york city or washington")
+                    print(f"Your input should be: {', '.join(valid_city_options)}")
                 if input_type == 2:
-                    print("Your input should be: january, february, march, april, may, june or all")
+                    print(f"Your input should be: {', '.join(valid_month_options)}")
                 if input_type == 3:
-                    print("Your input should be: sunday, monday, tuesday, wednesday, thursday, friday, saturday or all")
+                    print(f"Your input should be: {', '.join(valid_day_options)}")
         except ValueError:
             print("Sorry, your input is wrong")
     return user_input
@@ -47,18 +53,22 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = check_valid_input("Would you like to see data for chicago, New York City, or Washington?\n",1)
 
-    # get user input for month (all, january, february, ... , june)
-    month = check_valid_input("Which month - January, February, March, April, May, or June?\n",2)
+    options = {
+        1: ('city', ['chicago', 'new york city', 'washington']),
+        2: ('month', ['january', 'february', 'march', 'april', 'may', 'june', 'all']),
+        3: ('day', ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all'])
+    }
 
-    # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = check_valid_input("Which day - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday?\n",3)
-
+    filters = {}
+    
+    for option, (filter_name, valid_options) in options.items():
+        user_input = check_valid_input(f"Which {filter_name.capitalize()} - {', '.join(valid_options)}?\n", option)
+        filters[filter_name] = user_input
 
     print('-'*40)
-    return city, month, day
+    return filters['city'], filters['month'], filters['day']
+
 
 
 def load_data(city, month, day):
@@ -87,17 +97,15 @@ def load_data(city, month, day):
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
-        month = months.index(month) + 1
-    
-        # filter by month to create the new dataframe
-        df = df[df['month'] == month]
+        month_index = months.index(month) + 1
+        df = df[df['month'] == month_index]
 
     # filter by day of week if applicable
     if day != 'all':
-        # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
 
     return df
+
 
 
 def time_stats(df):
