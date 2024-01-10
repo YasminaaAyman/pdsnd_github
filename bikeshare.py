@@ -43,18 +43,22 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = check_valid_input("Would you like to see data for chicago, New York City, or Washington?\n",1)
 
-    # get user input for month (all, january, february, ... , june)
-    month = check_valid_input("Which month - January, February, March, April, May, or June?\n",2)
+    options = {
+        1: ('city', ['chicago', 'new york city', 'washington']),
+        2: ('month', ['january', 'february', 'march', 'april', 'may', 'june', 'all']),
+        3: ('day', ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all'])
+    }
 
-    # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = check_valid_input("Which day - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday?\n",3)
-
+    filters = {}
+    
+    for option, (filter_name, valid_options) in options.items():
+        user_input = check_valid_input(f"Which {filter_name.capitalize()} - {', '.join(valid_options)}?\n", option)
+        filters[filter_name] = user_input
 
     print('-'*40)
-    return city, month, day
+    return filters['city'], filters['month'], filters['day']
+
 
 
 def load_data(city, month, day):
