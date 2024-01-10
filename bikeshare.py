@@ -10,22 +10,25 @@ def check_valid_input(input_word, input_type):
     #type 1 is city
     #type 2 is month
     #type 3 is day
+    valid_city_options = ['chicago', 'new york city', 'washington']
+    valid_month_options = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
+    valid_day_options = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all']
     while True:
         user_input = input(input_word).lower()
         try:
-            if user_input in ['chicago','new york city','washington'] and input_type == 1:
+            if user_input in valid_city_options and input_type == 1:
                 break
-            elif user_input in ['january', 'february', 'march', 'april', 'may', 'june','all'] and input_type == 2:
+            elif user_input in valid_month_options and input_type == 2:
                 break
-            elif user_input in ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','all'] and input_type == 3:
+            elif user_input in valid_day_options and input_type == 3:
                 break
             else:
                 if input_type == 1:
-                    print("Your input should be: chicago, new york city or washington")
+                    print(f"Your input should be: {', '.join(valid_city_options)}")
                 if input_type == 2:
-                    print("Your input should be: january, february, march, april, may, june or all")
+                    print(f"Your input should be: {', '.join(valid_month_options)}")
                 if input_type == 3:
-                    print("Your input should be: sunday, monday, tuesday, wednesday, thursday, friday, saturday or all")
+                    print(f"Your input should be: {', '.join(valid_day_options)}")
         except ValueError:
             print("Sorry, your input is wrong")
     return user_input
