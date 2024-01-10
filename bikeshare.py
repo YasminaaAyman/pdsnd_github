@@ -87,17 +87,15 @@ def load_data(city, month, day):
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
-        month = months.index(month) + 1
-    
-        # filter by month to create the new dataframe
-        df = df[df['month'] == month]
+        month_index = months.index(month) + 1
+        df = df[df['month'] == month_index]
 
     # filter by day of week if applicable
     if day != 'all':
-        # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
 
     return df
+
 
 
 def time_stats(df):
